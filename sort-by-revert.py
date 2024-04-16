@@ -167,38 +167,6 @@ class Reverter:
         Returns:
             Optional[Reverter]: the sorted table if possible
             """
-        # Mettre les nœuds de départ dans un ensemble OUVERT
-        open_set = [self]
-
-        # Créer un ensemble vide FERME
-        closed_set = []
-
-        while open_set:
-            # Sélectionner un nœud aléatoire de OUVERT, soit le nœud n
-            current_node = random.choice(open_set)
-
-            # L’enlever de OUVERT et le mettre dans FERME
-            open_set.remove(current_node)
-            closed_set.append(current_node)
-
-            # Si n est un nœud but, alors la recherche termine avec succès
-            if current_node.is_the_goal():
-                return current_node
-
-            # Calculer les successeurs de n et les mettre dans l’ensemble M
-            successors = current_node.actions()
-
-            for successor in successors:
-                # Les nœuds de M qui n’apparaissent ni dans OUVERT ni dans FERME
-                # sont rajoutés à OUVERT
-                if successor not in open_set and successor not in closed_set:
-                    open_set.append(successor)
-
-        # Si OUVERT est vide, alors échec de la recherche
-        return None
-
-
-
     def solveHeuristic1(self) -> Optional[Reverter]:
         """This method implements heuristic search (heuristic n° 1:)
         Returns:
